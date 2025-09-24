@@ -1281,8 +1281,8 @@
             return;
           }
           
-          if (file.size > 2 * 1024 * 1024) {
-            error.textContent = 'ফাইলের আকার 2MB এর কম হতে হবে';
+          if (file.size > 10 * 1024 * 1024) {
+            error.textContent = 'ফাইলের আকার 10MB এর কম হতে হবে';
             error.style.display = 'block';
             this.value = '';
             preview.style.display = 'none';
