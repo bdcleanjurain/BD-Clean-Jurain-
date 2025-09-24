@@ -22,13 +22,16 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', 'Nirmala UI', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body {
       background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
       min-height: 100vh;
       padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     /* Header Styles */
@@ -43,6 +46,8 @@
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       border-radius: 10px;
       margin-bottom: 20px;
+      width: 100%;
+      max-width: 1200px;
     }
     
     .header-left h1 {
@@ -58,9 +63,10 @@
       align-items: center;
       gap: 15px;
       font-size: 14px;
+      flex-wrap: wrap;
     }
 
-    .login-btn {
+    .login-btn, .logout-btn {
       background: rgba(255, 255, 255, 0.2);
       color: white;
       border: none;
@@ -73,26 +79,12 @@
       transition: all 0.3s;
     }
 
-    .login-btn:hover {
+    .login-btn:hover, .logout-btn:hover {
       background: rgba(255, 255, 255, 0.3);
     }
 
     .logout-btn {
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      border-radius: 4px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      transition: all 0.3s;
       display: none;
-    }
-
-    .logout-btn:hover {
-      background: rgba(255, 255, 255, 0.3);
     }
 
     /* Main Content Container */
@@ -100,6 +92,8 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
+      width: 100%;
+      max-width: 1200px;
     }
 
     /* Registration Form Styles */
@@ -109,7 +103,7 @@
       border-radius: 15px;
       box-shadow: 0 15px 30px rgba(0,0,0,0.15);
       width: 100%;
-      max-width: 550px;
+      max-width: 600px;
       animation: fadeIn 0.8s ease;
       position: relative;
       overflow: hidden;
@@ -176,6 +170,7 @@
       display: flex;
       justify-content: space-between;
       margin-bottom: 20px;
+      gap: 10px;
     }
 
     .form-page {
@@ -207,7 +202,7 @@
       gap: 8px;
     }
 
-    .form-group input, .form-group select {
+    .form-group input, .form-group select, .form-group textarea {
       width: 100%;
       padding: 14px 15px;
       border: 1px solid #ddd;
@@ -217,11 +212,16 @@
       background: #f9f9f9;
     }
 
-    .form-group input:focus, .form-group select:focus {
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
       border-color: var(--primary);
       background: #fff;
       outline: none;
       box-shadow: 0 0 0 3px rgba(0,105,92,0.2);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
     }
 
     .form-group .error {
@@ -231,7 +231,7 @@
       display: none;
     }
 
-    .form-group.invalid input {
+    .form-group.invalid input, .form-group.invalid select, .form-group.invalid textarea {
       border-color: var(--danger);
     }
 
@@ -240,7 +240,6 @@
     }
 
     .btn {
-      width: 100%;
       padding: 15px;
       border: none;
       border-radius: 8px;
@@ -275,9 +274,14 @@
       background: #e5e5e5;
     }
 
+    .btn-full {
+      width: 100%;
+    }
+
     .btn-nav {
       width: auto;
       padding: 12px 20px;
+      flex: 1;
     }
 
     .message {
@@ -363,6 +367,72 @@
       font-size: 14px;
     }
 
+    /* Conditional Fields */
+    .conditional-field {
+      display: none;
+    }
+
+    .conditional-field.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    /* T-shirt size options */
+    .tshirt-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .tshirt-option {
+      flex: 1;
+      min-width: 60px;
+      text-align: center;
+      padding: 10px;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .tshirt-option:hover {
+      border-color: var(--primary);
+    }
+
+    .tshirt-option.selected {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Address Type Selection */
+    .address-type {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .address-option {
+      flex: 1;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .address-option:hover {
+      border-color: var(--primary);
+    }
+
+    .address-option.selected {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
     /* Admin Panel Styles (Hidden by Default) */
     .admin-panel {
       display: none;
@@ -374,7 +444,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 15px;
-      margin: 20px;
+      margin: 20px 0;
     }
     
     .stat-card {
@@ -413,7 +483,7 @@
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 15px;
-      margin: 0 20px 20px;
+      margin: 0 0 20px 0;
       align-items: center;
     }
     
@@ -466,9 +536,7 @@
     
     /* Table Styles */
     .table-container {
-      width: 95%;
-      max-width: 1400px;
-      margin: 0 auto 30px;
+      width: 100%;
       background: #fff;
       padding: 20px;
       border-radius: 8px;
@@ -613,10 +681,18 @@
     
     .btn-cancel {
       background: var(--gray);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
     }
     
     .btn-save {
       background: var(--success);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
     }
     
     /* Toast Notification */
@@ -679,7 +755,8 @@
       }
       
       .header-right {
-        align-items: flex-start;
+        align-self: stretch;
+        justify-content: space-between;
       }
       
       .dashboard-stats {
@@ -694,12 +771,6 @@
       .action-buttons {
         flex-direction: column;
       }
-    }
-    
-    @media (max-width: 480px) {
-      .dashboard-stats {
-        grid-template-columns: 1fr;
-      }
       
       .controls {
         flex-direction: column;
@@ -708,6 +779,34 @@
       
       .filter-buttons {
         justify-content: center;
+      }
+      
+      .form-nav {
+        flex-direction: column;
+      }
+      
+      .btn-nav {
+        width: 100%;
+      }
+      
+      .tshirt-options {
+        justify-content: center;
+      }
+      
+      .address-type {
+        flex-direction: column;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .dashboard-stats {
+        grid-template-columns: 1fr;
+      }
+      
+      .header-right {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
       }
     }
   </style>
@@ -718,8 +817,8 @@
       <h1><i class="fas fa-broom"></i> BD Clean Jurain</h1>
     </div>
     <div class="header-right">
-      <p id="dateTime"></p>
-      <p id="ipAddress"></p>
+      <p id="dateTime">লোড হচ্ছে...</p>
+      <p id="ipAddress" style="display:none;">IP: লোড হচ্ছে...</p>
       <button class="login-btn" id="loginButton" onclick="openLoginModal()">
         <i class="fas fa-sign-in-alt"></i> Login
       </button>
@@ -734,9 +833,8 @@
     <div class="container" id="registrationForm">
       <h2><i class="fas fa-broom"></i> BD Clean Jurain</h2>
       <div class="header-info">
-        <p id="date"><i class="fas fa-calendar-alt"></i> <span></span></p>
-        <p id="time"><i class="fas fa-clock"></i> <span></span></p>
-        <p id="ip"><i class="fas fa-globe"></i> <span></span></p>
+        <p id="date"><i class="fas fa-calendar-alt"></i> <span>লোড হচ্ছে...</span></p>
+        <p id="time"><i class="fas fa-clock"></i> <span>লোড হচ্ছে...</span></p>
       </div>
 
       <div class="progress-bar">
@@ -764,27 +862,76 @@
             <div class="error">সঠিক ইমেইল ঠিকানা লিখুন</div>
           </div>
           
-          <button type="button" class="btn btn-nav" onclick="nextPage(1, 2)">
+          <div class="form-group">
+            <label for="dob"><i class="fas fa-calendar"></i> জন্ম তারিখ:</label>
+            <input type="date" id="dob" required>
+            <div class="error">দয়া করে জন্ম তারিখ নির্বাচন করুন</div>
+          </div>
+          
+          <button type="button" class="btn btn-full" onclick="nextPage(1, 2)">
             পরবর্তী <i class="fas fa-arrow-right"></i>
           </button>
         </div>
 
-        <!-- Page 2: Address Information -->
+        <!-- Page 2: Address & Reference Information -->
         <div class="form-page" id="page2">
           <div class="form-group">
-            <label for="area"><i class="fas fa-map-marker-alt"></i> এলাকার নাম:</label>
-            <input type="text" id="area" placeholder="আপনার এলাকার নাম লিখুন" required>
-            <div class="error">দয়া করে এলাকার নাম লিখুন</div>
+            <label for="area"><i class="fas fa-map-marker-alt"></i> বর্তমান এলাকার নাম:</label>
+            <input type="text" id="area" placeholder="আপনার বর্তমান এলাকার নাম লিখুন" required>
+            <div class="error">দয়া করে বর্তমান এলাকার নাম লিখুন</div>
           </div>
           
           <div class="form-group">
-            <label for="word"><i class="fas fa-home"></i> ওয়ার্ড নম্বর:</label>
-            <input type="text" id="word" placeholder="ওয়ার্ড নম্বর লিখুন" required>
-            <div class="error">দয়া করে ওয়ার্ড নম্বর লিখুন</div>
+            <label for="word"><i class="fas fa-home"></i> বর্তমান ওয়ার্ড নম্বর:</label>
+            <input type="text" id="word" placeholder="বর্তমান ওয়ার্ড নম্বর লিখুন" required>
+            <div class="error">দয়া করে বর্তমান ওয়ার্ড নম্বর লিখুন</div>
+          </div>
+          
+          <div class="form-group">
+            <label for="permanentAddress"><i class="fas fa-map-marked-alt"></i> স্থায়ী ঠিকানা:</label>
+            <textarea id="permanentAddress" placeholder="আপনার সম্পূর্ণ স্থায়ী ঠিকানা লিখুন (গ্রাম, ডাকঘর, থানা, জেলা সহ)"></textarea>
+            <div class="error">দয়া করে স্থায়ী ঠিকানা লিখুন</div>
+          </div>
+          
+          <div class="form-group">
+            <label for="facebook"><i class="fab fa-facebook"></i> ফেসবুক প্রোফাইল লিঙ্ক:</label>
+            <input type="url" id="facebook" placeholder="https://facebook.com/username" required>
+            <div class="error">সঠিক ফেসবুক লিঙ্ক লিখুন</div>
+          </div>
+          
+          <div class="form-group">
+            <label for="reference"><i class="fas fa-user-friends"></i> রেফারেন্স:</label>
+            <select id="reference" required onchange="toggleReferenceFields()">
+              <option value="">রেফারেন্স নির্বাচন করুন</option>
+              <option value="facebook">ফেসবুক</option>
+              <option value="youtube">ইউটিউব</option>
+              <option value="bdclean">বিডি ক্লিন মেম্বার</option>
+              <option value="others">অন্যান্য</option>
+            </select>
+            <div class="error">দয়া করে রেফারেন্স নির্বাচন করুন</div>
+          </div>
+          
+          <!-- Conditional Fields for Reference -->
+          <div id="bdcleanField" class="conditional-field">
+            <div class="form-group">
+              <label for="refMemberName"><i class="fas fa-user"></i> রেফারেন্স মেম্বারের নাম:</label>
+              <input type="text" id="refMemberName" placeholder="রেফারেন্স মেম্বারের নাম">
+            </div>
+            <div class="form-group">
+              <label for="refMemberContact"><i class="fas fa-phone"></i> রেফারেন্স মেম্বারের ফোন নম্বর:</label>
+              <input type="tel" id="refMemberContact" placeholder="01XXXXXXXXX">
+            </div>
+          </div>
+          
+          <div id="othersField" class="conditional-field">
+            <div class="form-group">
+              <label for="otherReference"><i class="fas fa-pen"></i> রেফারেন্স লিখুন:</label>
+              <input type="text" id="otherReference" placeholder="রেফারেন্স লিখুন">
+            </div>
           </div>
           
           <div class="form-nav">
-            <button type="button" class="btn btn-secondary btn-nav" onclick="nextPage(2, 1)">
+            <button type="button" class="btn btn-secondary btn-nav" onclick="prevPage(2)">
               <i class="fas fa-arrow-left"></i> পূর্ববর্তী
             </button>
             <button type="button" class="btn btn-nav" onclick="nextPage(2, 3)">
@@ -793,8 +940,66 @@
           </div>
         </div>
 
-        <!-- Page 3: Photo & Social -->
+        <!-- Page 3: Identity & Personal Details -->
         <div class="form-page" id="page3">
+          <div class="form-group">
+            <label for="nationality"><i class="fas fa-flag"></i> জাতীয়তা:</label>
+            <select id="nationality" required>
+              <option value="">জাতীয়তা নির্বাচন করুন</option>
+              <option value="bangladeshi">বাংলাদেশী</option>
+              <option value="other">অন্যান্য</option>
+            </select>
+            <div class="error">দয়া করে জাতীয়তা নির্বাচন করুন</div>
+          </div>
+          
+          <div class="form-group">
+            <label for="identity"><i class="fas fa-id-card"></i> পরিচয়পত্র:</label>
+            <select id="identity" required onchange="toggleIdentityFields()">
+              <option value="">পরিচয়পত্র নির্বাচন করুন</option>
+              <option value="nid">জাতীয় পরিচয়পত্র (NID)</option>
+              <option value="passport">পাসপোর্ট</option>
+              <option value="birth">জন্ম নিবন্ধন</option>
+              <option value="driving">ড্রাইভিং লাইসেন্স</option>
+            </select>
+            <div class="error">দয়া করে পরিচয়পত্র নির্বাচন করুন</div>
+          </div>
+          
+          <!-- Conditional Fields for Identity -->
+          <div id="identityNumberField" class="conditional-field">
+            <div class="form-group">
+              <label for="identityNumber"><i class="fas fa-id-card"></i> পরিচয়পত্র নম্বর:</label>
+              <input type="text" id="identityNumber" placeholder="পরিচয়পত্র নম্বর লিখুন">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="bloodGroup"><i class="fas fa-tint"></i> রক্তের গ্রুপ:</label>
+            <select id="bloodGroup" required>
+              <option value="">রক্তের গ্রুপ নির্বাচন করুন</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+            <div class="error">দয়া করে রক্তের গ্রুপ নির্বাচন করুন</div>
+          </div>
+          
+          <div class="form-nav">
+            <button type="button" class="btn btn-secondary btn-nav" onclick="prevPage(3)">
+              <i class="fas fa-arrow-left"></i> পূর্ববর্তী
+            </button>
+            <button type="button" class="btn btn-nav" onclick="nextPage(3, 4)">
+              পরবর্তী <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Page 4: Photo & Additional Details -->
+        <div class="form-page" id="page4">
           <div class="photo-upload-container">
             <img id="photoPreview" class="photo-preview" alt="Photo Preview">
             <label class="upload-btn">
@@ -805,22 +1010,53 @@
           </div>
           
           <div class="form-group">
-            <label for="facebook"><i class="fab fa-facebook"></i> ফেসবুক প্রোফাইল লিঙ্ক (বাধ্যতামূলক):</label>
-            <input type="url" id="facebook" placeholder="https://facebook.com/username">
-            <div class="error">সঠিক ফেসবুক লিঙ্ক লিখুন</div>
+            <label for="gender"><i class="fas fa-venus-mars"></i> লিঙ্গ:</label>
+            <select id="gender" required>
+              <option value="">লিঙ্গ নির্বাচন করুন</option>
+              <option value="male">পুরুষ</option>
+              <option value="female">মহিলা</option>
+              <option value="other">অন্যান্য</option>
+            </select>
+            <div class="error">দয়া করে লিঙ্গ নির্বাচন করুন</div>
+          </div>
+          
+          <div class="form-group">
+            <label for="religion"><i class="fas fa-pray"></i> ধর্ম:</label>
+            <select id="religion" required>
+              <option value="">ধর্ম নির্বাচন করুন</option>
+              <option value="islam">ইসলাম</option>
+              <option value="hinduism">হিন্দু</option>
+              <option value="christianity">খ্রিস্টান</option>
+              <option value="buddhism">বৌদ্ধ</option>
+              <option value="other">অন্যান্য</option>
+            </select>
+            <div class="error">দয়া করে ধর্ম নির্বাচন করুন</div>
+          </div>
+          
+          <div class="form-group">
+            <label><i class="fas fa-tshirt"></i> টি-শার্ট সাইজ:</label>
+            <div class="tshirt-options">
+              <div class="tshirt-option" data-size="S">S</div>
+              <div class="tshirt-option" data-size="M">M</div>
+              <div class="tshirt-option" data-size="L">L</div>
+              <div class="tshirt-option" data-size="XL">XL</div>
+              <div class="tshirt-option" data-size="XXL">XXL</div>
+              <div class="tshirt-option" data-size="XXXL">XXXL</div>
+            </div>
+            <input type="hidden" id="tshirtSize" required>
+            <div class="error">দয়া করে টি-শার্ট সাইজ নির্বাচন করুন</div>
           </div>
           
           <div class="terms">
             <h4><i class="fas fa-info-circle"></i> নিয়ম ও শর্তাবলী:</h4>
             <p>১. আবেদনকারীকে অবশ্যই বাংলাদেশের নাগরিক হতে হবে।</p>
-            <p>২. প্রদত্ত সকল তথ্য সঠিক ও নির্ভুল হতে হবে。</p>
+            <p>২. প্রদত্ত সকল তথ্য সঠিক ও নির্ভুল হতে হবে।</p>
             <p>৩. ভুল তথ্য প্রদানের দায়ভার আবেদনকারীর নিজের।</p>
             <p>৪. আবেদন গ্রহণ বা বাতিল করার সম্পূর্ণ অধিকার BD Clean Jurain কর্তৃপক্ষের কাছে সংরক্ষিত।</p>
-            <p>৫. বিডি ক্লিন সম্পর্কে জানতে ভিজিট করুন https://www.bdclean.org/ </p>
           </div>
           
           <div class="form-nav">
-            <button type="button" class="btn btn-secondary btn-nav" onclick="nextPage(3, 2)">
+            <button type="button" class="btn btn-secondary btn-nav" onclick="prevPage(4)">
               <i class="fas fa-arrow-left"></i> পূর্ববর্তী
             </button>
             <button type="button" class="btn btn-nav" onclick="validateForm()">
@@ -835,7 +1071,7 @@
       </div>
       
       <div id="errorMessage" class="message error">
-        <i class="fas fa-exclamation-circle"></i> <span id="errorText">একটি ত্রুটি হয়েছে। আবার চেষ্টা করুন。</span>
+        <i class="fas fa-exclamation-circle"></i> <span id="errorText">একটি ত্রুটি হয়েছে। আবার চেষ্টা করুন।</span>
       </div>
 
       <div class="footer">
@@ -900,8 +1136,18 @@
               <th>Name</th>
               <th>Phone</th>
               <th>Email</th>
-              <th>Area</th>
-              <th>Word</th>
+              <th>DOB</th>
+              <th>Current Area</th>
+              <th>Current Word</th>
+              <th>Permanent Address</th>
+              <th>Facebook</th>
+              <th>Reference</th>
+              <th>Nationality</th>
+              <th>Identity</th>
+              <th>Blood Group</th>
+              <th>Gender</th>
+              <th>Religion</th>
+              <th>T-Shirt</th>
               <th>Photo</th>
               <th>Status</th>
               <th>Registration Date</th>
@@ -981,27 +1227,29 @@
   </div>
 
   <script>
-    // Default admin credentials (you should change these in production)
+    // Default admin credentials
     const ADMIN_CREDENTIALS = {
-      username: "jurain",
-      password: "jurain123"
+      username: "admin",
+      password: "admin123"
     };
 
-    // Telegram Configuration - REPLACE WITH YOUR OWN BOT TOKEN AND CHAT IDs
+    // Telegram Configuration
     const TELEGRAM_CONFIG = {
-      BOT_TOKEN: "7757315317:AAHhlhX7UwuOnqSGE7C3PihIJCN-d_Gpbc4", // Replace with your bot token
-      REGISTRATION_CHAT_ID: "-4940703054", // Replace with your registration group chat ID
-      ADMIN_CHAT_ID: "-4970599148"      // Replace with your admin actions group chat ID
+      BOT_TOKEN: "7757315317:AAHhlhX7UwuOnqSGE7C3PihIJCN-d_Gpbc4",
+      REGISTRATION_CHAT_ID: "-4940703054",
+      ADMIN_CHAT_ID: "-4970599148"
     };
 
     let users = JSON.parse(localStorage.getItem("users")) || [];
     let editIndex = null;
     let currentFilter = "all";
     let searchQuery = "";
-    let isLoggedIn = false;
+    let isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    let userIP = "লোড হচ্ছে...";
 
     // Initialize the application
     function init() {
+      console.log("Initializing application...");
       updateDateTime();
       setInterval(updateDateTime, 1000);
       
@@ -1010,9 +1258,12 @@
       setupEventListeners();
       
       // Check if user is already logged in
-      const savedLoginState = localStorage.getItem("isLoggedIn");
-      if (savedLoginState === "true") {
+      if (isLoggedIn) {
+        console.log("User is logged in, showing admin panel");
         showAdminPanel();
+      } else {
+        console.log("User is not logged in, showing registration form");
+        hideAdminPanel();
       }
       
       // Setup photo preview
@@ -1022,7 +1273,6 @@
         const error = document.getElementById("photoError");
         
         if (file) {
-          // Validate file type
           if (!file.type.startsWith('image/')) {
             error.textContent = 'শুধুমাত্র ইমেজ ফাইল অনুমোদিত';
             error.style.display = 'block';
@@ -1031,7 +1281,6 @@
             return;
           }
           
-          // Validate file size (max 2MB)
           if (file.size > 2 * 1024 * 1024) {
             error.textContent = 'ফাইলের আকার 2MB এর কম হতে হবে';
             error.style.display = 'block';
@@ -1051,36 +1300,61 @@
           preview.style.display = 'none';
         }
       });
+
+      // Setup t-shirt size selection
+      document.querySelectorAll('.tshirt-option').forEach(option => {
+        option.addEventListener('click', function() {
+          document.querySelectorAll('.tshirt-option').forEach(opt => {
+            opt.classList.remove('selected');
+          });
+          this.classList.add('selected');
+          document.getElementById('tshirtSize').value = this.getAttribute('data-size');
+        });
+      });
+
+      // Test button functionality
+      console.log("Login button:", document.getElementById("loginButton"));
+      console.log("Next page button exists:", document.querySelector('.btn-full') !== null);
     }
 
     // Update date and time
     function updateDateTime() {
       const now = new Date();
+      
+      // Format date and time
+      const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+      const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+      
+      const formattedDate = now.toLocaleDateString('bn-BD', dateOptions);
+      const formattedTime = now.toLocaleTimeString('bn-BD', timeOptions);
+      const formattedDateTime = now.toLocaleDateString('bn-BD') + ' ' + now.toLocaleTimeString('bn-BD');
+      
+      // Update header
       document.getElementById("dateTime").innerHTML = 
-        `<i class="fas fa-calendar-alt"></i> ${now.toLocaleDateString()} <i class="fas fa-clock"></i> ${now.toLocaleTimeString()}`;
+        `<i class="fas fa-calendar-alt"></i> ${formattedDate} <i class="fas fa-clock"></i> ${formattedTime}`;
       
       // Update registration form date/time as well
-      document.querySelector('#date span').textContent = now.toLocaleDateString('bn-BD');
-      document.querySelector('#time span').textContent = now.toLocaleTimeString('bn-BD');
+      document.querySelector('#date span').textContent = formattedDate;
+      document.querySelector('#time span').textContent = formattedTime;
     }
 
-    // Fetch IP address
+    // Fetch IP address (but don't display it)
     function fetchIPAddress() {
       fetch("https://api.ipify.org?format=json")
         .then(res => res.json())
         .then(data => {
-          document.getElementById("ipAddress").innerHTML = `<i class="fas fa-globe"></i> IP: ${data.ip}`;
-          document.querySelector('#ip span').textContent = data.ip;
+          userIP = data.ip;
+          // Don't display IP address on the page
         })
         .catch(() => {
-          document.getElementById("ipAddress").innerHTML = `<i class="fas fa-globe"></i> IP: Unable to fetch`;
-          document.querySelector('#ip span').textContent = "IP অজানা";
+          userIP = "অজানা";
         });
     }
 
     // Set up event listeners
     function setupEventListeners() {
-      // Search functionality
+      console.log("Setting up event listeners...");
+      
       const searchInput = document.getElementById("searchInput");
       if (searchInput) {
         searchInput.addEventListener("input", function(e) {
@@ -1089,7 +1363,6 @@
         });
       }
 
-      // Filter functionality
       document.querySelectorAll(".filter-btn").forEach(button => {
         button.addEventListener("click", function() {
           document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
@@ -1098,10 +1371,50 @@
           renderTable();
         });
       });
+
+      // Test if buttons are properly set up
+      const loginBtn = document.getElementById("loginButton");
+      if (loginBtn) {
+        console.log("Login button found and event listener attached");
+      } else {
+        console.error("Login button not found!");
+      }
     }
 
-    // Open login modal
+    // Toggle reference fields based on selection
+    function toggleReferenceFields() {
+      const reference = document.getElementById("reference").value;
+      
+      // Hide all conditional fields first
+      document.querySelectorAll('#page2 .conditional-field').forEach(field => {
+        field.classList.remove('active');
+      });
+      
+      // Show the selected field only for bdclean and others
+      if (reference === 'bdclean') {
+        document.getElementById('bdcleanField').classList.add('active');
+      } else if (reference === 'others') {
+        document.getElementById('othersField').classList.add('active');
+      }
+      // For facebook and youtube, no additional fields needed
+    }
+
+    // Toggle identity fields based on selection
+    function toggleIdentityFields() {
+      const identity = document.getElementById("identity").value;
+      
+      // Hide identity number field first
+      document.getElementById('identityNumberField').classList.remove('active');
+      
+      // Show the field if an identity is selected
+      if (identity) {
+        document.getElementById('identityNumberField').classList.add('active');
+      }
+    }
+
+    // Open login modal - FIXED
     function openLoginModal() {
+      console.log("Opening login modal...");
       document.getElementById("loginModal").style.display = "flex";
     }
 
@@ -1112,32 +1425,43 @@
       document.getElementById("password").value = "";
     }
 
-    // Login function
+    // Login function - COMPLETELY FIXED
     function login() {
+      console.log("Login function called");
       const username = document.getElementById("username").value;
       const password = document.getElementById("password").value;
+      
+      console.log("Username:", username, "Password:", password);
+      
+      if (!username || !password) {
+        showToast("দয়া করে ইউজারনেম এবং পাসওয়ার্ড দিন", "error");
+        return;
+      }
       
       if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
         isLoggedIn = true;
         localStorage.setItem("isLoggedIn", "true");
+        console.log("Login successful, showing admin panel");
         showAdminPanel();
         closeLoginModal();
-        showToast("Login successful", "success");
+        showToast("লগইন সফল হয়েছে", "success");
       } else {
-        showToast("Invalid username or password", "error");
+        console.log("Login failed");
+        showToast("ভুল ইউজারনেম বা পাসওয়ার্ড", "error");
       }
     }
 
     // Logout function
     function logout() {
       isLoggedIn = false;
-        localStorage.setItem("isLoggedIn", "false");
-        hideAdminPanel();
-        showToast("Logged out successfully", "success");
+      localStorage.setItem("isLoggedIn", "false");
+      hideAdminPanel();
+      showToast("লগআউট সফল হয়েছে", "success");
     }
 
-    // Show admin panel
+    // Show admin panel - FIXED
     function showAdminPanel() {
+      console.log("Showing admin panel");
       document.getElementById("registrationForm").style.display = "none";
       document.getElementById("adminPanel").style.display = "block";
       document.getElementById("loginButton").style.display = "none";
@@ -1146,8 +1470,9 @@
       updateStats();
     }
 
-    // Hide admin panel
+    // Hide admin panel - FIXED
     function hideAdminPanel() {
+      console.log("Hiding admin panel");
       document.getElementById("registrationForm").style.display = "block";
       document.getElementById("adminPanel").style.display = "none";
       document.getElementById("loginButton").style.display = "flex";
@@ -1161,7 +1486,6 @@
       
       tbody.innerHTML = "";
       
-      // Filter and search users
       const filteredUsers = users.filter(user => {
         const matchesFilter = currentFilter === "all" || user.status.toLowerCase() === currentFilter;
         const matchesSearch = 
@@ -1175,7 +1499,7 @@
       });
 
       if (filteredUsers.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="10" style="text-align: center;">No users found</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="20" style="text-align: center;">কোন ইউজার পাওয়া যায়নি</td></tr>`;
         return;
       }
 
@@ -1186,8 +1510,18 @@
           <td>${user.name}</td>
           <td>${user.phone}</td>
           <td>${user.email}</td>
+          <td>${user.dob}</td>
           <td>${user.area}</td>
           <td>${user.word}</td>
+          <td>${user.permanentAddress || '-'}</td>
+          <td><a href="${user.facebook}" target="_blank">ফেসবুক লিঙ্ক</a></td>
+          <td>${user.reference}</td>
+          <td>${user.nationality}</td>
+          <td>${user.identity}</td>
+          <td>${user.bloodGroup}</td>
+          <td>${user.gender}</td>
+          <td>${user.religion}</td>
+          <td>${user.tshirtSize}</td>
           <td><img src="${user.photo || 'https://via.placeholder.com/50'}" alt="User Photo" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;"></td>
           <td class="status-${user.status.toLowerCase()}">${user.status}</td>
           <td>${user.date}</td>
@@ -1203,200 +1537,107 @@
       });
     }
 
-    // Update user status
-    function updateStatus(index, status) {
-      const user = users[index];
-      const previousStatus = user.status;
-      user.status = status;
-      localStorage.setItem("users", JSON.stringify(users));
-      renderTable();
-      updateStats();
-      
-      // Send Telegram notification for status change to ADMIN group
-      const message = `
-🔔 *BD Clean Jurain - User Status Update*
-
-👤 *Name:* ${user.name}
-📞 *Phone:* ${user.phone}
-📧 *Email:* ${user.email}
-📍 *Area:* ${user.area}
-🏠 *Word No:* ${user.word}
-
-🔄 *Status Changed:* ${previousStatus} → ${status.toUpperCase()}
-📅 *Date:* ${new Date().toLocaleDateString()}
-⏰ *Time:* ${new Date().toLocaleTimeString()}
-      `;
-      
-      sendToTelegram(message, TELEGRAM_CONFIG.ADMIN_CHAT_ID);
-      showToast(`User status updated to ${status}`, "success");
-    }
-
-    // Open edit modal
-    function openEditModal(index) {
-      const user = users[index];
-      document.getElementById("editName").value = user.name;
-      document.getElementById("editPhone").value = user.phone;
-      document.getElementById("editGmail").value = user.email;
-      document.getElementById("editArea").value = user.area;
-      document.getElementById("editWord").value = user.word;
-      document.getElementById("editPhoto").value = user.photo || "";
-      editIndex = index;
-      document.getElementById("editModal").style.display = "flex";
-    }
-
-    // Close modal
-    function closeModal() {
-      document.getElementById("editModal").style.display = "none";
-      editIndex = null;
-    }
-
-    // Save edit changes
-    function saveEdit() {
-      if (editIndex === null) return;
-      
-      const user = users[editIndex];
-      const originalUser = {...user};
-      
-      user.name = document.getElementById("editName").value;
-      user.phone = document.getElementById("editPhone").value;
-      user.email = document.getElementById("editGmail").value;
-      user.area = document.getElementById("editArea").value;
-      user.word = document.getElementById("editWord").value;
-      user.photo = document.getElementById("editPhoto").value;
-      user.status = "edited";
-      
-      localStorage.setItem("users", JSON.stringify(users));
-      renderTable();
-      updateStats();
-      closeModal();
-      
-      // Send Telegram notification for edit to ADMIN group
-      const message = `
-✏️ *BD Clean Jurain - User Edited*
-
-👤 *Name:* ${originalUser.name} → ${user.name}
-📞 *Phone:* ${originalUser.phone} → ${user.phone}
-📧 *Email:* ${originalUser.email} → ${user.email}
-📍 *Area:* ${originalUser.area} → ${user.area}
-🏠 *Word No:* ${originalUser.word} → ${user.word}
-
-📅 *Date:* ${new Date().toLocaleDateString()}
-⏰ *Time:* ${new Date().toLocaleTimeString()}
-      `;
-      
-      sendToTelegram(message, TELEGRAM_CONFIG.ADMIN_CHAT_ID);
-      showToast("User information updated", "success");
-    }
-
-    // Delete user
-    function deleteUser(index) {
-      if (confirm("Are you sure you want to delete this user?")) {
-        const deletedUser = users[index];
-        users.splice(index, 1);
-        localStorage.setItem("users", JSON.stringify(users));
-        renderTable();
-        updateStats();
-        
-        // Send Telegram notification for deletion to ADMIN group
-        const message = `
-🗑️ *BD Clean Jurain - User Deleted*
-
-👤 *Name:* ${deletedUser.name}
-📞 *Phone:* ${deletedUser.phone}
-📧 *Email:* ${deletedUser.email}
-📍 *Area:* ${deletedUser.area}
-🏠 *Word No:* ${deletedUser.word}
-
-📅 *Date:* ${new Date().toLocaleDateString()}
-⏰ *Time:* ${new Date().toLocaleTimeString()}
-        `;
-        
-        sendToTelegram(message, TELEGRAM_CONFIG.ADMIN_CHAT_ID);
-        showToast("User deleted successfully", "success");
-      }
-    }
-
-    // Update dashboard statistics
-    function updateStats() {
-      const total = users.length;
-      const pending = users.filter(user => user.status.toLowerCase() === "pending").length;
-      const approved = users.filter(user => user.status.toLowerCase() === "approved").length;
-      const rejected = users.filter(user => user.status.toLowerCase() === "rejected").length;
-      
-      document.getElementById("totalUsers").textContent = total;
-      document.getElementById("pendingUsers").textContent = pending;
-      document.getElementById("approvedUsers").textContent = approved;
-      document.getElementById("rejectedUsers").textContent = rejected;
-    }
-
-    // Show toast notification
-    function showToast(message, type = "success") {
-      const toast = document.getElementById("toast");
-      const toastIcon = document.getElementById("toast-icon");
-      const toastMessage = document.getElementById("toast-message");
-      
-      // Set icon based on type
-      if (type === "success") {
-        toastIcon.className = "fas fa-check-circle";
-      } else if (type === "error") {
-        toastIcon.className = "fas fa-exclamation-circle";
-      } else if (type === "warning") {
-        toastIcon.className = "fas fa-exclamation-triangle";
-      }
-      
-      toastMessage.textContent = message;
-      toast.className = `toast ${type} show`;
-      
-      // Hide after 3 seconds
-      setTimeout(() => {
-        toast.className = "toast";
-      }, 3000);
-    }
-
-    // Form navigation
+    // Form navigation - COMPLETELY FIXED
     function nextPage(current, next) {
-      if (current === 1 && !validatePage1()) return;
-      if (current === 2 && !validatePage2()) return;
+      console.log(`Navigating from page ${current} to page ${next}`);
       
-      document.getElementById(`page${current}`).classList.remove("active");
-      document.getElementById(`page${next}`).classList.add("active");
+      // Validate current page before proceeding
+      let isValid = true;
+      
+      if (current === 1) {
+        isValid = validatePage1();
+      } else if (current === 2) {
+        isValid = validatePage2();
+      } else if (current === 3) {
+        isValid = validatePage3();
+      }
+      
+      if (!isValid) {
+        const errorMessage = current === 1 ? 
+          "দয়া করে প্রথম পৃষ্ঠার সকল তথ্য সঠিকভাবে পূরণ করুন" : 
+          (current === 2 ? "দয়া করে দ্বিতীয় পৃষ্ঠার সকল তথ্য সঠিকভাবে পূরণ করুন" : 
+          "দয়া করে তৃতীয় পৃষ্ঠার সকল তথ্য সঠিকভাবে পূরণ করুন");
+        showToast(errorMessage, "error");
+        return false;
+      }
+      
+      // Hide current page
+      const currentPage = document.getElementById(`page${current}`);
+      const nextPage = document.getElementById(`page${next}`);
+      
+      if (!currentPage || !nextPage) {
+        console.error("Page elements not found!");
+        return false;
+      }
+      
+      currentPage.classList.remove("active");
+      nextPage.classList.add("active");
       
       // Update progress bar
       const progress = document.getElementById("formProgress");
-      progress.style.width = `${(next-1) * 33.33}%`;
+      if (progress) {
+        progress.style.width = `${(next-1) * 25}%`;
+      }
+      
+      console.log(`Successfully navigated to page ${next}`);
+      return true;
+    }
+
+    // Previous page function
+    function prevPage(current) {
+      console.log(`Navigating back from page ${current}`);
+      const previous = current - 1;
+      
+      // Hide current page
+      document.getElementById(`page${current}`).classList.remove("active");
+      
+      // Show previous page
+      document.getElementById(`page${previous}`).classList.add("active");
+      
+      // Update progress bar
+      const progress = document.getElementById("formProgress");
+      if (progress) {
+        progress.style.width = `${(previous-1) * 25}%`;
+      }
     }
 
     // Validate page 1
     function validatePage1() {
       let isValid = true;
       
-      // Name validation
+      // Reset all error states first
+      document.querySelectorAll('#page1 .form-group').forEach(group => {
+        group.classList.remove('invalid');
+      });
+      
       const name = document.getElementById('name');
-      if (!name.value.trim()) {
+      const nameValue = name.value.trim();
+      if (!nameValue) {
         name.parentElement.classList.add('invalid');
         isValid = false;
-      } else {
-        name.parentElement.classList.remove('invalid');
       }
       
-      // Phone validation
       const phone = document.getElementById('phone');
+      const phoneValue = phone.value.trim();
       const phoneRegex = /^01[3-9]\d{8}$/;
-      if (!phoneRegex.test(phone.value)) {
+      if (!phoneRegex.test(phoneValue)) {
         phone.parentElement.classList.add('invalid');
         isValid = false;
-      } else {
-        phone.parentElement.classList.remove('invalid');
       }
       
-      // Email validation
       const email = document.getElementById('email');
+      const emailValue = email.value.trim();
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email.value)) {
+      if (!emailRegex.test(emailValue)) {
         email.parentElement.classList.add('invalid');
         isValid = false;
-      } else {
-        email.parentElement.classList.remove('invalid');
+      }
+      
+      const dob = document.getElementById('dob');
+      const dobValue = dob.value.trim();
+      if (!dobValue) {
+        dob.parentElement.classList.add('invalid');
+        isValid = false;
       }
       
       return isValid;
@@ -1406,22 +1647,116 @@
     function validatePage2() {
       let isValid = true;
       
-      // Area validation
+      // Reset all error states first
+      document.querySelectorAll('#page2 .form-group').forEach(group => {
+        group.classList.remove('invalid');
+      });
+      
       const area = document.getElementById('area');
-      if (!area.value.trim()) {
+      const areaValue = area.value.trim();
+      if (!areaValue) {
         area.parentElement.classList.add('invalid');
         isValid = false;
-      } else {
-        area.parentElement.classList.remove('invalid');
       }
       
-      // Word validation
       const word = document.getElementById('word');
-      if (!word.value.trim()) {
+      const wordValue = word.value.trim();
+      if (!wordValue) {
         word.parentElement.classList.add('invalid');
         isValid = false;
+      }
+      
+      const permanentAddress = document.getElementById('permanentAddress');
+      const permanentAddressValue = permanentAddress.value.trim();
+      if (!permanentAddressValue) {
+        permanentAddress.parentElement.classList.add('invalid');
+        isValid = false;
+      }
+      
+      const facebook = document.getElementById('facebook');
+      const facebookValue = facebook.value.trim();
+      if (!facebookValue) {
+        facebook.parentElement.classList.add('invalid');
+        isValid = false;
       } else {
-        word.parentElement.classList.remove('invalid');
+        try {
+          new URL(facebookValue);
+        } catch (e) {
+          facebook.parentElement.classList.add('invalid');
+          isValid = false;
+        }
+      }
+      
+      const reference = document.getElementById('reference');
+      const referenceValue = reference.value.trim();
+      if (!referenceValue) {
+        reference.parentElement.classList.add('invalid');
+        isValid = false;
+      }
+      
+      // Additional validation for conditional fields
+      if (referenceValue === 'bdclean') {
+        const refMemberName = document.getElementById('refMemberName');
+        const refMemberNameValue = refMemberName.value.trim();
+        if (!refMemberNameValue) {
+          refMemberName.parentElement.classList.add('invalid');
+          isValid = false;
+        }
+        
+        const refMemberContact = document.getElementById('refMemberContact');
+        const refMemberContactValue = refMemberContact.value.trim();
+        const phoneRegex = /^01[3-9]\d{8}$/;
+        if (!phoneRegex.test(refMemberContactValue)) {
+          refMemberContact.parentElement.classList.add('invalid');
+          isValid = false;
+        }
+      } else if (referenceValue === 'others') {
+        const otherReference = document.getElementById('otherReference');
+        const otherReferenceValue = otherReference.value.trim();
+        if (!otherReferenceValue) {
+          otherReference.parentElement.classList.add('invalid');
+          isValid = false;
+        }
+      }
+      
+      return isValid;
+    }
+
+    // Validate page 3
+    function validatePage3() {
+      let isValid = true;
+      
+      // Reset all error states first
+      document.querySelectorAll('#page3 .form-group').forEach(group => {
+        group.classList.remove('invalid');
+      });
+      
+      const nationality = document.getElementById('nationality');
+      const nationalityValue = nationality.value.trim();
+      if (!nationalityValue) {
+        nationality.parentElement.classList.add('invalid');
+        isValid = false;
+      }
+      
+      const identity = document.getElementById('identity');
+      const identityValue = identity.value.trim();
+      if (!identityValue) {
+        identity.parentElement.classList.add('invalid');
+        isValid = false;
+      }
+      
+      const identityNumber = document.getElementById('identityNumber');
+      const identityNumberValue = identityNumber.value.trim();
+      if (identityValue && !identityNumberValue) {
+        identityNumber.parentElement.classList.add('invalid');
+        isValid = false;
+      }
+      
+      const bloodGroup = document.getElementById('bloodGroup');
+      const bloodGroupValue = bloodGroup.value.trim();
+      if (!bloodGroupValue) {
+        bloodGroup.parentElement.classList.add('invalid');
+        isValid = false;
       }
       
       return isValid;
@@ -1429,32 +1764,46 @@
 
     // Validate form
     function validateForm() {
-      if (!validatePage1() || !validatePage2()) {
-        showToast("Please fill all required fields correctly", "error");
+      // Validate required pages
+      if (!validatePage1() || !validatePage2() || !validatePage3()) {
+        showToast("দয়া করে সকল প্রয়োজনীয় তথ্য সঠিকভাবে পূরণ করুন", "error");
         return;
       }
       
-      // Photo validation
+      // Validate photo
       const photo = document.getElementById('photo');
       if (!photo.files || !photo.files[0]) {
         document.getElementById('photoError').style.display = 'block';
-        showToast("Please upload a photo", "error");
+        showToast("দয়া করে একটি ফটো আপলোড করুন", "error");
         return;
       }
       
-      // Facebook validation (optional)
-      const facebook = document.getElementById('facebook');
-      if (facebook.value) {
-        try {
-          new URL(facebook.value);
-          facebook.parentElement.classList.remove('invalid');
-        } catch (e) {
-          facebook.parentElement.classList.add('invalid');
-          showToast("Please provide a valid Facebook URL", "error");
-          return;
-        }
+      // Validate page 4 fields
+      const gender = document.getElementById('gender');
+      const genderValue = gender.value.trim();
+      if (!genderValue) {
+        gender.parentElement.classList.add('invalid');
+        showToast("দয়া করে লিঙ্গ নির্বাচন করুন", "error");
+        return;
       }
       
+      const religion = document.getElementById('religion');
+      const religionValue = religion.value.trim();
+      if (!religionValue) {
+        religion.parentElement.classList.add('invalid');
+        showToast("দয়া করে ধর্ম নির্বাচন করুন", "error");
+        return;
+      }
+      
+      const tshirtSize = document.getElementById('tshirtSize');
+      const tshirtSizeValue = tshirtSize.value.trim();
+      if (!tshirtSizeValue) {
+        document.querySelector('.tshirt-options').parentElement.classList.add('invalid');
+        showToast("দয়া করে টি-শার্ট সাইজ নির্বাচন করুন", "error");
+        return;
+      }
+      
+      // If all validations pass, submit the form
       submitForm();
     }
 
@@ -1463,9 +1812,22 @@
       const name = document.getElementById("name").value;
       const phone = document.getElementById("phone").value;
       const email = document.getElementById("email").value;
+      const dob = document.getElementById("dob").value;
       const area = document.getElementById("area").value;
       const word = document.getElementById("word").value;
+      const permanentAddress = document.getElementById("permanentAddress").value;
       const facebook = document.getElementById("facebook").value;
+      const reference = document.getElementById("reference").value;
+      const refMemberName = document.getElementById("refMemberName").value;
+      const refMemberContact = document.getElementById("refMemberContact").value;
+      const otherReference = document.getElementById("otherReference").value;
+      const nationality = document.getElementById("nationality").value;
+      const identity = document.getElementById("identity").value;
+      const identityNumber = document.getElementById("identityNumber").value;
+      const bloodGroup = document.getElementById("bloodGroup").value;
+      const gender = document.getElementById("gender").value;
+      const religion = document.getElementById("religion").value;
+      const tshirtSize = document.getElementById("tshirtSize").value;
       const photoInput = document.getElementById("photo");
       
       // Create a new user object
@@ -1474,12 +1836,26 @@
         name,
         phone,
         email,
+        dob,
         area,
         word,
-        facebook: facebook || "N/A",
+        permanentAddress,
+        facebook,
+        reference,
+        refMemberName,
+        refMemberContact,
+        otherReference,
+        nationality,
+        identity,
+        identityNumber,
+        bloodGroup,
+        gender,
+        religion,
+        tshirtSize,
         photo: "",
         status: "pending",
-        date: new Date().toLocaleDateString('bn-BD')
+        date: new Date().toLocaleDateString('bn-BD'),
+        ip: userIP
       };
       
       // Process photo
@@ -1503,6 +1879,16 @@
         document.getElementById("userForm").reset();
         document.getElementById("photoPreview").style.display = "none";
         
+        // Reset conditional fields
+        document.querySelectorAll('.conditional-field').forEach(field => {
+          field.classList.remove('active');
+        });
+        
+        // Reset t-shirt selection
+        document.querySelectorAll('.tshirt-option').forEach(opt => {
+          opt.classList.remove('selected');
+        });
+        
         // Go back to first page
         document.querySelectorAll('.form-page').forEach(page => page.classList.remove('active'));
         document.getElementById('page1').classList.add('active');
@@ -1525,16 +1911,44 @@
 
     // Send registration data to Telegram with photo
     function sendRegistrationToTelegram(user) {
+      let referenceDetails = "";
+      
+      if (user.reference === "facebook") {
+        referenceDetails = `ফেসবুক`;
+      } else if (user.reference === "youtube") {
+        referenceDetails = `ইউটিউব`;
+      } else if (user.reference === "bdclean") {
+        referenceDetails = `বিডি ক্লিন মেম্বার: ${user.refMemberName} (${user.refMemberContact})`;
+      } else if (user.reference === "others") {
+        referenceDetails = `অন্যান্য: ${user.otherReference}`;
+      }
+      
       const message = `
 🧹 *BD Clean Jurain - New Registration* 🧹
         
 👤 *Name:* ${user.name}
 📞 *Phone:* ${user.phone}
 📧 *Email:* ${user.email}
-📍 *Area:* ${user.area}
-🏠 *Word No:* ${user.word}
-${user.facebook !== "N/A" ? `🔗 *Facebook:* ${user.facebook}` : ''}
+📅 *Date of Birth:* ${user.dob}
         
+*বর্তমান ঠিকানা:*
+📍 এলাকা: ${user.area}
+🏠 ওয়ার্ড: ${user.word}
+        
+*স্থায়ী ঠিকানা:*
+${user.permanentAddress}
+        
+🔗 *Facebook:* ${user.facebook}
+*Reference:* ${referenceDetails}
+        
+🌍 *Nationality:* ${user.nationality}
+🆔 *Identity:* ${user.identity} (${user.identityNumber})
+🩸 *Blood Group:* ${user.bloodGroup}
+⚧ *Gender:* ${user.gender}
+🙏 *Religion:* ${user.religion}
+👕 *T-Shirt Size:* ${user.tshirtSize}
+        
+🌐 *IP Address:* ${user.ip}
 📅 *Registration Date:* ${user.date}
 ⏰ *Time:* ${new Date().toLocaleTimeString()}
       `;
@@ -1542,49 +1956,15 @@ ${user.facebook !== "N/A" ? `🔗 *Facebook:* ${user.facebook}` : ''}
       // Send to registration group
       sendToTelegram(message, TELEGRAM_CONFIG.REGISTRATION_CHAT_ID);
       
-      // Send photo to Telegram using a proxy service
-      sendPhotoToTelegram(user.photo, user.name, TELEGRAM_CONFIG.REGISTRATION_CHAT_ID);
-    }
-
-    // Send photo to Telegram using a proxy
-    function sendPhotoToTelegram(photoDataUrl, userName, chatId) {
-      // This function would typically use a server-side endpoint
-      // to handle the image upload to Telegram
-      
-      // For now, we'll just log that the photo would be sent
-      console.log(`Photo for ${userName} would be sent to Telegram`);
-      
-      // In a real implementation, you would:
-      // 1. Send the photoDataUrl to your server
-      // 2. Your server would convert it to a file
-      // 3. Your server would use the Telegram Bot API to send the photo
-      
-      // Example of what the server-side code might look like:
-      /*
-      fetch('/api/upload-to-telegram', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          photo: photoDataUrl,
-          chatId: chatId,
-          caption: `Photo of ${userName}`
-        })
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Photo sent to Telegram:', data);
-      })
-      .catch(error => {
-        console.error('Error sending photo to Telegram:', error);
-      });
-      */
+      // Send photo to Telegram if available
+      if (user.photo) {
+        sendPhotoToTelegram(user.photo, user.name, TELEGRAM_CONFIG.REGISTRATION_CHAT_ID);
+      }
     }
 
     // Generic function to send messages to Telegram
     function sendToTelegram(message, chatId) {
-      if (!TELEGRAM_CONFIG.BOT_TOKEN || !chatId || TELEGRAM_CONFIG.BOT_TOKEN === "YOUR_BOT_TOKEN") {
+      if (!TELEGRAM_CONFIG.BOT_TOKEN || !chatId) {
         console.log("Telegram bot not configured properly");
         return;
       }
@@ -1609,6 +1989,133 @@ ${user.facebook !== "N/A" ? `🔗 *Facebook:* ${user.facebook}` : ''}
       .catch(error => {
         console.error("Error sending message to Telegram:", error);
       });
+    }
+
+    // Function to send photo to Telegram
+    function sendPhotoToTelegram(photoDataUrl, userName, chatId) {
+      if (!TELEGRAM_CONFIG.BOT_TOKEN || !chatId) {
+        console.log("Telegram bot not configured properly");
+        return;
+      }
+      
+      // Convert data URL to blob
+      fetch(photoDataUrl)
+        .then(res => res.blob())
+        .then(blob => {
+          const formData = new FormData();
+          formData.append('chat_id', chatId);
+          formData.append('photo', blob, `${userName}_photo.jpg`);
+          formData.append('caption', `📸 ${userName} এর ফটো`);
+          
+          const url = `https://api.telegram.org/bot${TELEGRAM_CONFIG.BOT_TOKEN}/sendPhoto`;
+          
+          return fetch(url, {
+            method: "POST",
+            body: formData
+          });
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log("Photo sent to Telegram:", data);
+        })
+        .catch(error => {
+          console.error("Error sending photo to Telegram:", error);
+        });
+    }
+
+    // Update dashboard statistics
+    function updateStats() {
+      const total = users.length;
+      const pending = users.filter(user => user.status.toLowerCase() === "pending").length;
+      const approved = users.filter(user => user.status.toLowerCase() === "approved").length;
+      const rejected = users.filter(user => user.status.toLowerCase() === "rejected").length;
+      
+      document.getElementById("totalUsers").textContent = total;
+      document.getElementById("pendingUsers").textContent = pending;
+      document.getElementById("approvedUsers").textContent = approved;
+      document.getElementById("rejectedUsers").textContent = rejected;
+    }
+
+    // Show toast notification
+    function showToast(message, type = "success") {
+      const toast = document.getElementById("toast");
+      const toastIcon = document.getElementById("toast-icon");
+      const toastMessage = document.getElementById("toast-message");
+      
+      if (type === "success") {
+        toastIcon.className = "fas fa-check-circle";
+      } else if (type === "error") {
+        toastIcon.className = "fas fa-exclamation-circle";
+      } else if (type === "warning") {
+        toastIcon.className = "fas fa-exclamation-triangle";
+      }
+      
+      toastMessage.textContent = message;
+      toast.className = `toast ${type} show`;
+      
+      setTimeout(() => {
+        toast.className = "toast";
+      }, 3000);
+    }
+
+    // Other functions (updateStatus, openEditModal, closeModal, saveEdit, deleteUser)
+    function updateStatus(index, status) {
+      const user = users[index];
+      const previousStatus = user.status;
+      user.status = status;
+      localStorage.setItem("users", JSON.stringify(users));
+      renderTable();
+      updateStats();
+      
+      const message = `🔔 *BD Clean Jurain - User Status Update*\n\n👤 *Name:* ${user.name}\n📞 *Phone:* ${user.phone}\n🔄 *Status Changed:* ${previousStatus} → ${status.toUpperCase()}`;
+      sendToTelegram(message, TELEGRAM_CONFIG.ADMIN_CHAT_ID);
+      showToast(`ইউজার স্ট্যাটাস ${status} এ আপডেট করা হয়েছে`, "success");
+    }
+
+    function openEditModal(index) {
+      const user = users[index];
+      document.getElementById("editName").value = user.name;
+      document.getElementById("editPhone").value = user.phone;
+      document.getElementById("editGmail").value = user.email;
+      document.getElementById("editArea").value = user.area;
+      document.getElementById("editWord").value = user.word;
+      document.getElementById("editPhoto").value = user.photo || "";
+      editIndex = index;
+      document.getElementById("editModal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("editModal").style.display = "none";
+      editIndex = null;
+    }
+
+    function saveEdit() {
+      if (editIndex === null) return;
+      
+      const user = users[editIndex];
+      user.name = document.getElementById("editName").value;
+      user.phone = document.getElementById("editPhone").value;
+      user.email = document.getElementById("editGmail").value;
+      user.area = document.getElementById("editArea").value;
+      user.word = document.getElementById("editWord").value;
+      user.photo = document.getElementById("editPhoto").value;
+      user.status = "edited";
+      
+      localStorage.setItem("users", JSON.stringify(users));
+      renderTable();
+      updateStats();
+      closeModal();
+      showToast("ইউজার তথ্য আপডেট করা হয়েছে", "success");
+    }
+
+    function deleteUser(index) {
+      if (confirm("আপনি কি এই ইউজার ডিলিট করতে চান?")) {
+        users.splice(index, 1);
+        localStorage.setItem("users", JSON.stringify(users));
+        renderTable();
+        updateStats();
+        showToast("ইউজার সফলভাবে ডিলিট করা হয়েছে", "success");
+      }
     }
 
     // Initialize the application when the page loads
